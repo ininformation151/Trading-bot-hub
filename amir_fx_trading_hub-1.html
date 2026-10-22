@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#07111f">
+<title>Amir FX | Trading Bot Hub</title>
+<style>
+:root{--bg:#07111f;--panel:#0d1b2d;--panel2:#10243a;--gold:#f5bd4f;--cyan:#4de2d0;--text:#f4f7fb;--muted:#9aacc1;--line:rgba(255,255,255,.1)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 75% 0%,#142d46 0,transparent 42%),var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh}
+a{color:inherit;text-decoration:none}.wrap{max-width:1160px;margin:auto;padding:0 22px}
+nav{height:78px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:11px;font-weight:850;letter-spacing:.4px}.logo{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,var(--gold),#ffdf8c);color:#101725;box-shadow:0 8px 28px #f5bd4f24}.logo svg{width:35px;height:35px}
+.brand small{display:block;font-size:10px;letter-spacing:2px;color:var(--muted);font-weight:700;margin-top:2px}
+.nav-right{display:flex;align-items:center;gap:12px}.status{font-size:12px;color:var(--cyan);display:flex;gap:7px;align-items:center}.dot{width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 12px var(--cyan)}
+.license-btn{border:0;cursor:pointer;border-radius:12px;padding:12px 17px;background:linear-gradient(135deg,var(--gold),#ffda80);color:#151b24;font-weight:850;box-shadow:0 8px 24px #f5bd4f20}
+.hero{padding:76px 0 45px;display:grid;grid-template-columns:1.15fr .85fr;gap:42px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;border:1px solid #4de2d044;background:#4de2d00d;color:var(--cyan);padding:8px 12px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase}
+h1{font-size:clamp(38px,5vw,66px);line-height:1.03;letter-spacing:-2.5px;margin:20px 0 18px}h1 span{color:var(--gold)}.intro{font-size:16px;line-height:1.8;color:var(--muted);max-width:590px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}.primary-link,.secondary-link{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:14px 18px;border-radius:13px;font-weight:800;font-size:13px}.primary-link{background:var(--gold);color:#111a27}.secondary-link{border:1px solid var(--line);background:#ffffff06}
+.hero-card{border:1px solid #ffffff14;border-radius:24px;padding:26px;background:linear-gradient(145deg,#142b43,#0a1728);box-shadow:0 25px 80px #0004;position:relative;overflow:hidden}.hero-card:before{content:"";position:absolute;width:190px;height:190px;right:-65px;top:-75px;border-radius:50%;background:#4de2d018;filter:blur(3px)}
+.card-top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:12px}.live-tag{color:var(--cyan);font-size:10px;font-weight:900;letter-spacing:1px}
+.chart{height:125px;margin:22px 0 16px;border-radius:14px;background:linear-gradient(180deg,#4de2d00c,#4de2d000);display:flex;align-items:center;justify-content:center}
+.chart svg{width:100%;height:100%}.metrics{display:grid;grid-template-columns:1fr 1fr;gap:12px}.metric{padding:15px;border-radius:14px;background:#ffffff06;border:1px solid #ffffff0a}.metric strong{font-size:22px;display:block}.metric span{font-size:11px;color:var(--muted)}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin:26px 0 22px}.section-head h2{font-size:28px;letter-spacing:-.8px;margin:0 0 8px}.section-head p{margin:0;color:var(--muted);font-size:13px;line-height:1.6}.section-label{font-size:10px;color:var(--gold);font-weight:900;letter-spacing:1.7px;text-transform:uppercase}
+.bot-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px}.bot{border:1px solid var(--line);background:linear-gradient(160deg,#11243a,#0b1727);border-radius:19px;padding:21px;min-height:220px;display:flex;flex-direction:column;transition:transform .2s,border-color .2s}.bot:hover{transform:translateY(-4px);border-color:#f5bd4f66}.bot-icon{width:46px;height:46px;border-radius:14px;background:#f5bd4f14;border:1px solid #f5bd4f28;display:grid;place-items:center;color:var(--gold);margin-bottom:17px}.bot-icon svg{width:29px;height:29px;display:block}.bot h3{font-size:16px;margin:0 0 9px}.bot p{font-size:12px;color:var(--muted);line-height:1.6;margin:0 0 20px}.open-link{margin-top:auto;display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid var(--line);font-size:12px;font-weight:800;color:var(--gold)}.bot.disabled{opacity:.7;border-style:dashed}.bot.disabled .open-link{color:var(--muted)}
+.license-strip{margin:42px 0 55px;padding:28px;border-radius:22px;background:linear-gradient(105deg,#f5bd4f1c,#4de2d009);border:1px solid #f5bd4f40;display:flex;align-items:center;justify-content:space-between;gap:22px}.license-strip h2{margin:0 0 8px;font-size:23px}.license-strip p{margin:0;color:var(--muted);font-size:13px;line-height:1.7}
+footer{border-top:1px solid var(--line);padding:22px 0 30px;color:var(--muted);font-size:11px;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}.risk{max-width:650px;line-height:1.6}
+.modal-backdrop{position:fixed;inset:0;background:#020812c9;backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:20px;z-index:20}.modal-backdrop.show{display:flex}.modal{width:min(100%,450px);background:#0d1b2d;border:1px solid #ffffff1a;border-radius:23px;padding:27px;box-shadow:0 30px 100px #0008;position:relative}.close{position:absolute;right:17px;top:15px;border:0;background:#ffffff0b;color:white;border-radius:9px;width:34px;height:34px;font-size:20px;cursor:pointer}.telegram-icon{width:54px;height:54px;display:grid;place-items:center;border-radius:17px;background:#229ed91c;color:#67caff;margin-bottom:17px}.telegram-icon svg{width:34px;height:34px}.modal h2{margin:0 0 10px;font-size:25px}.modal p{font-size:13px;line-height:1.7;color:var(--muted)}label{font-size:12px;color:#d9e4ef;font-weight:700;display:block;margin:18px 0 8px}input{width:100%;border:1px solid #ffffff1c;background:#07111f;color:white;border-radius:12px;padding:14px;font:inherit;outline:none}input:focus{border-color:var(--cyan)}.telegram-go{display:flex;justify-content:center;width:100%;margin-top:13px;border:0;border-radius:12px;padding:14px;background:#229ed9;color:white;font-weight:900;cursor:pointer}.hint{font-size:11px!important;margin-top:11px}
+@media(max-width:900px){.hero{grid-template-columns:1fr;padding-top:54px}.hero-card{max-width:600px}.bot-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.wrap{padding:0 16px}nav{height:70px}.status{display:none}.brand{font-size:13px}.logo{width:38px;height:38px}.license-btn{padding:10px 12px;font-size:11px}.hero{padding-top:43px;gap:30px}h1{letter-spacing:-1.5px}.intro{font-size:14px}.section-head{align-items:start;flex-direction:column}.bot-grid{grid-template-columns:1fr 1fr;gap:10px}.bot{padding:15px;min-height:225px}.bot h3{font-size:14px}.bot p{font-size:11px}.license-strip{align-items:start;flex-direction:column;padding:22px;margin:30px 0 40px}.license-strip h2{font-size:20px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav>
+  <a class="brand" href="#home"><span class="logo" aria-label="Amir FX robot logo"><svg viewBox="0 0 48 48" role="img" aria-hidden="true"><path d="M24 5v5" stroke="#101725" stroke-width="3" stroke-linecap="round"/><circle cx="24" cy="4" r="2.5" fill="#101725"/><rect x="8" y="12" width="32" height="25" rx="8" fill="#101725"/><rect x="12" y="16" width="24" height="16" rx="5" fill="#f5bd4f"/><circle cx="19" cy="23.5" r="2.5" fill="#101725"/><circle cx="29" cy="23.5" r="2.5" fill="#101725"/><path d="M19 28h10" stroke="#101725" stroke-width="2.4" stroke-linecap="round"/><path d="M4 20v9M44 20v9" stroke="#101725" stroke-width="3" stroke-linecap="round"/></svg></span><span>AMIR FX<small>AI TRADING HUB</small></span></a>
+  <div class="nav-right"><span class="status"><span class="dot"></span> BOT DIRECTORY</span><button class="license-btn" data-license>🎁 Get License Free</button></div>
+</nav>
+<main id="home">
+<section class="hero">
+  <div>
+    <div class="eyebrow"><span class="dot"></span> Trading tools · One hub</div>
+    <h1>Trade smarter.<br><span>Navigate with AI.</span></h1>
+    <p class="intro">Welcome to the Amir FX Trading Hub — your central place to access trading bot dashboards and signal tools. Choose a bot below to open its platform, or contact us on Telegram to ask about a free license.</p>
+    <div class="hero-actions"><a class="primary-link" href="#bots">Explore Trading Bots <span>↘</span></a><button class="secondary-link" data-license>✦ Get Free License</button></div>
+  </div>
+  <div class="hero-card">
+    <div class="card-top"><span>AMIR FX · CONTROL CENTER</span><span class="live-tag">● ONLINE HUB</span></div>
+    <div class="chart"><svg viewBox="0 0 500 150" preserveAspectRatio="none" aria-label="Decorative market trend illustration"><defs><linearGradient id="fill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4de2d0" stop-opacity=".25"/><stop offset="100%" stop-color="#4de2d0" stop-opacity="0"/></linearGradient></defs><path d="M0 118 L38 104 L72 112 L110 76 L145 91 L180 54 L218 73 L254 42 L292 60 L330 26 L365 46 L400 19 L438 32 L500 8 L500 150 L0 150Z" fill="url(#fill)"/><path d="M0 118 L38 104 L72 112 L110 76 L145 91 L180 54 L218 73 L254 42 L292 60 L330 26 L365 46 L400 19 L438 32 L500 8" fill="none" stroke="#4de2d0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="metrics"><div class="metric"><strong>03</strong><span>BOT LINKS READY</span></div><div class="metric"><strong>24/7</strong><span>ACCESS YOUR TOOLS</span></div></div>
+  </div>
+</section>
+<section id="bots">
+  <div class="section-head"><div><div class="section-label">Choose your platform</div><h2>Trading Bot Directory</h2><p>Open a bot dashboard using the links provided.</p></div><span class="section-label">01 — 04</span></div>
+  <div class="bot-grid">
+    <a class="bot" href="https://amirfxai.vercel.app/" target="_blank" rel="noopener noreferrer"><div class="bot-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 6v6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><circle cx="24" cy="5" r="2.5" fill="currentColor"/><rect x="7" y="13" width="34" height="27" rx="8" fill="none" stroke="currentColor" stroke-width="2.5"/><rect x="12" y="18" width="24" height="15" rx="4" fill="currentColor" opacity=".16"/><circle cx="18.5" cy="25" r="2.5" fill="currentColor"/><circle cx="29.5" cy="25" r="2.5" fill="currentColor"/><path d="M18 31h12M3 22v8M45 22v8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></div><h3>Amir FX AI Bot</h3><p>Open the main Amir FX AI Bot website and trading signal hub.</p><span class="open-link">Open platform <span>↗</span></span></a>
+    <a class="bot" href="https://chinesesignalsbotprobybrand.lovable.app/dashboard" target="_blank" rel="noopener noreferrer"><div class="bot-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 39V9M8 39h33" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><rect x="14" y="25" width="6" height="10" rx="1.5" fill="currentColor" opacity=".65"/><rect x="24" y="17" width="6" height="18" rx="1.5" fill="currentColor" opacity=".8"/><rect x="34" y="10" width="6" height="25" rx="1.5" fill="currentColor"/></svg></div><h3>Chinese Signals Bot Pro</h3><p>Access the Chinese Signals Bot Pro dashboard.</p><span class="open-link">Open dashboard <span>↗</span></span></a>
+    <a class="bot" href="https://amirfxbotnew.lovable.app/" target="_blank" rel="noopener noreferrer"><div class="bot-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M27 4 11 26h11l-2 18 17-24H25z" fill="currentColor" stroke="currentColor" stroke-linejoin="round" stroke-width="1.5"/></svg></div><h3>Amir FX Bot New</h3><p>Launch the latest Amir FX Bot platform.</p><span class="open-link">Open platform <span>↗</span></span></a>
+    <div class="bot disabled"><div class="bot-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 10v28M10 24h28" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg></div><h3>Bot #4</h3><p>Fourth bot link will be added when you provide its URL.</p><span class="open-link">Link coming soon <span>⌁</span></span></div>
+  </div>
+</section>
+<section class="license-strip"><div><h2>🎁 Want a Free License?</h2><p>Contact Amir FX on Telegram and request your free license.<br>Tap the button to enter the Telegram username and open the contact page.</p></div><button class="license-btn" data-license>Get License Free →</button></section>
+</main>
+<footer><span>© <span id="year"></span> Amir FX Trading Hub</span><span class="risk">Risk notice: Trading involves financial risk. Signals and tools do not guarantee profits. Verify any platform and never deposit money you cannot afford to lose.</span></footer>
+</div>
+<div class="modal-backdrop" id="licenseModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+    <button class="close" id="closeModal" aria-label="Close">×</button>
+    <div class="telegram-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M39.8 9.1 33.7 38c-.5 2-1.7 2.5-3.4 1.5l-9.5-7-4.6 4.4c-.5.5-.9.9-1.8.9l.7-9.7 17.7-16c.8-.7-.2-1.1-1.2-.4L9.8 25.5.5 22.6c-2-.6-2-2 .4-2.9L36.7 6c1.7-.6 3.2.4 3.1 3.1Z" fill="currentColor" transform="translate(4 1) scale(.9)"/></svg></div>
+    <h2 id="modalTitle">Get Your Free License</h2>
+    <p>Free license ke liye Telegram par seedha Amir FX ko message karein. Aapki Telegram ID pehle se add kar di gayi hai.</p>
+    <label for="telegramUser">Telegram username</label>
+    <input id="telegramUser" type="text" value="amirfx72" aria-label="Telegram username" readonly>
+    <button class="telegram-go" id="telegramGo">Message @amirfx72 on Telegram ↗</button>
+    <p class="hint">Telegram par message karke free license request karein. Password ya login code kabhi share na karein.</p>
+  </div>
+</div>
+<script>
+const modal=document.getElementById('licenseModal');
+const userInput=document.getElementById('telegramUser');
+document.querySelectorAll('[data-license]').forEach(btn=>btn.addEventListener('click',()=>{modal.classList.add('show');setTimeout(()=>userInput.focus(),50)}));
+document.getElementById('closeModal').addEventListener('click',()=>modal.classList.remove('show'));
+modal.addEventListener('click',e=>{if(e.target===modal)modal.classList.remove('show')});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')modal.classList.remove('show')});
+document.getElementById('telegramGo').addEventListener('click',()=>{
+  window.open('https://t.me/amirfx72','_blank','noopener,noreferrer');
+});
+document.getElementById('year').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
